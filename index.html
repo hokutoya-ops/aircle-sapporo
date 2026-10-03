@@ -1,0 +1,1283 @@
+<title>エアコン清掃救急隊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Oswald:wght@500;700&display=swap">
+<style>
+/* Layout: editorial, confident, Japanese sensibility. Dark hero and section rhythm
+   alternate with warm ivory sections. Asymmetric grids, oversize mincho display,
+   numbered chapters, pull-quote testimonials, vertical kana accents. */
+:root{
+  --ivory:#f1ebdc;
+  --ivory-2:#e8e1cf;
+  --ink:#0f0d0a;
+  --ink-2:#1b1915;
+  --paper:#f6f1e3;
+  --fg:#141210;
+  --muted:#6b645a;
+  --line:#d6cfbd;
+  --red:#c7442a;
+  --red-ink:#fbf1e4;
+  --red-dark:#9c2f1a;
+  --teal:#143f49;
+  --gold:#b58e3f;
+  --f-min:"Shippori Mincho B1",'Yu Mincho','游明朝','YuMincho',serif;
+  --f-sans:"Noto Sans JP","Zen Kaku Gothic New",'游ゴシック','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;
+  --f-mono:"Oswald",'Courier New',monospace;
+
+  --bg:var(--ivory);
+  --surface:var(--paper);
+  --card:#ffffff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a0908;
+    --surface:#121010;
+    --card:#1a1715;
+    --fg:#efe9db;
+    --muted:#9d968a;
+    --line:#2a2520;
+    --ivory:#141210;
+    --ivory-2:#1a1715;
+    --paper:#141210;
+    --ink:#f3ede0;
+    --ink-2:#e5dfd1;
+    --red:#e86947;
+    --red-ink:#15100b;
+    --red-dark:#c0432a;
+    --teal:#4ea6b7;
+    --gold:#dcb060;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0a0908;
+  --surface:#121010;
+  --card:#1a1715;
+  --fg:#efe9db;
+  --muted:#9d968a;
+  --line:#2a2520;
+  --ivory:#141210;
+  --ivory-2:#1a1715;
+  --paper:#141210;
+  --ink:#f3ede0;
+  --ink-2:#e5dfd1;
+  --red:#e86947;
+  --red-ink:#15100b;
+  --red-dark:#c0432a;
+  --teal:#4ea6b7;
+  --gold:#dcb060;
+  color-scheme:dark;
+}
+
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--f-sans);
+  font-feature-settings:"palt" 1;
+  line-height:1.8;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+*,*::before,*::after{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--f-min);font-weight:700;letter-spacing:.04em;line-height:1.3;margin:0;text-wrap:balance}
+p{margin:0}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:transparent;border:0;cursor:pointer}
+input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+/* ========= Fixed top bar ========= */
+.topbar{
+  position:sticky;
+  top:env(safe-area-inset-top,0px);
+  z-index:60;
+  background:color-mix(in srgb,var(--ink) 95%,transparent);
+  color:var(--ink-2);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.topbar-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:12px 24px;max-width:1280px;margin-inline:auto;
+}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand-emblem{
+  width:40px;height:40px;flex:none;position:relative;
+  display:grid;place-items:center;
+  background:var(--red);color:#fff8ec;
+  font-family:var(--f-min);font-weight:800;font-size:19px;
+  letter-spacing:.02em;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.brand-txt{display:flex;flex-direction:column;line-height:1.1}
+.brand-ja{font-family:var(--f-min);font-weight:800;font-size:15px;color:#f5efe1;letter-spacing:.08em}
+.brand-en{font-family:var(--f-mono);font-size:10px;color:#9e988b;letter-spacing:.2em;margin-top:3px}
+.topcall{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--red);color:#fff8ec;
+  padding:10px 18px;border-radius:0;font-weight:700;font-size:13px;letter-spacing:.08em;
+  font-family:var(--f-sans);white-space:nowrap;
+  transition:background .15s;
+}
+.topcall:hover{background:var(--red-dark)}
+.topcall svg{width:14px;height:14px}
+
+/* ========= HERO ========= */
+.hero{
+  position:relative;background:var(--ink);color:#f3ede0;overflow:hidden;
+  padding:72px 0 0;
+  min-height:calc(100vh - 65px);
+  display:flex;flex-direction:column;
+}
+.hero-grid{
+  max-width:1280px;margin-inline:auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end;flex:1;
+  position:relative;z-index:2;
+}
+.hero-chapter{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.4em;color:var(--red);
+  display:flex;align-items:center;gap:14px;margin-bottom:28px;font-weight:500;
+}
+.hero-chapter::before{content:"";width:36px;height:1px;background:var(--red)}
+.hero h1{
+  font-size:clamp(42px,8vw,112px);
+  line-height:1.05;letter-spacing:.02em;
+  color:#f5efe1;
+  font-weight:800;
+  margin-bottom:0;
+}
+.hero h1 .block{display:block}
+.hero h1 .accent{color:var(--red)}
+.hero h1 .em{
+  background:var(--red);color:#15100b;padding:0 .15em .05em;
+  display:inline-block;
+}
+.hero-sub{
+  margin-top:32px;max-width:48ch;color:#c7bfae;font-size:15px;line-height:2;
+  padding-left:16px;border-left:2px solid var(--red);
+}
+.hero-cta{display:flex;gap:14px;margin-top:40px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 28px;font-weight:700;font-size:14px;letter-spacing:.1em;
+  font-family:var(--f-sans);transition:all .18s;
+}
+.btn-primary{background:var(--red);color:#fff8ec}
+.btn-primary:hover{background:var(--red-dark);transform:translateX(4px)}
+.btn-ghost{background:transparent;color:#f5efe1;border:1px solid #4a443b}
+.btn-ghost:hover{background:#f5efe1;color:var(--ink)}
+.btn-arrow{width:18px;height:1px;background:currentColor;position:relative;display:inline-block}
+.btn-arrow::after{content:"";position:absolute;right:0;top:-3px;width:8px;height:8px;border-right:1px solid currentColor;border-top:1px solid currentColor;transform:rotate(45deg)}
+
+.hero-phone{
+  text-align:right;color:#f5efe1;
+}
+.hero-phone .lbl{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.4em;color:#9e988b;margin-bottom:10px;
+}
+.hero-phone .num{
+  font-family:var(--f-mono);font-size:clamp(28px,4.5vw,46px);font-weight:700;
+  color:var(--red);letter-spacing:.04em;line-height:1;display:block;
+}
+.hero-phone .hrs{
+  color:#9e988b;font-size:12px;margin-top:10px;letter-spacing:.1em;
+}
+
+/* Vertical kana accent, left side of hero */
+.vkana{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--f-min);font-size:11px;letter-spacing:.6em;
+  color:rgba(245,239,225,.25);user-select:none;z-index:1;
+}
+.hero::before{
+  /* subtle radial glow upper-right */
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 500px at 100% 0%,rgba(199,68,42,.18),transparent 60%);
+}
+.hero::after{
+  /* paper texture */
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .1 0 0 0 0 .08 0 0 0 .05 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+}
+
+/* Hero marquee */
+.marquee{
+  background:#15110c;color:#9e988b;border-top:1px solid #2a241d;border-bottom:1px solid #2a241d;
+  padding:14px 0;overflow:hidden;position:relative;z-index:2;
+}
+.marquee-track{
+  display:flex;gap:72px;white-space:nowrap;
+  animation:scroll 40s linear infinite;
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.3em;
+}
+.marquee-track span{display:inline-flex;align-items:center;gap:14px}
+.marquee-track span::before{content:"◆";color:var(--red);font-size:10px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .marquee-track{animation:none}
+}
+
+/* ========= Section common ========= */
+section{position:relative}
+.wrap{max-width:1280px;margin-inline:auto;padding:0 32px}
+.chapter{
+  display:flex;align-items:baseline;gap:18px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.4em;
+  color:var(--red);margin-bottom:16px;font-weight:500;
+}
+.chapter .num{
+  font-size:14px;font-weight:700;color:var(--red);
+}
+.chapter .sep{flex:1;height:1px;background:var(--line);min-width:40px}
+.chapter-dark .sep{background:#2a2520}
+.sec-title{
+  font-size:clamp(28px,4.6vw,52px);
+  line-height:1.25;letter-spacing:.03em;margin-bottom:20px;
+  color:var(--ink);
+}
+.sec-title.light{color:#f5efe1}
+.sec-lede{color:var(--muted);max-width:58ch;font-size:15px;line-height:2}
+.sec-lede.light{color:#9e988b}
+
+/* ========= 001 Problems ========= */
+.sec-problems{background:var(--ivory);color:var(--fg);padding:120px 0}
+.sec-problems .top{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:72px;
+}
+.problem-list{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:0;
+  border-top:1px solid var(--line);
+}
+.problem{
+  padding:36px 32px 36px 0;border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:48px 1fr;gap:24px;align-items:start;
+  position:relative;
+}
+.problem:nth-child(odd){border-right:1px solid var(--line);padding-right:48px}
+.problem:nth-child(even){padding-left:48px}
+.problem-num{
+  font-family:var(--f-mono);font-size:14px;font-weight:700;color:var(--red);
+  padding-top:6px;letter-spacing:.1em;
+}
+.problem h3{
+  font-family:var(--f-sans);font-size:19px;font-weight:900;color:var(--ink);
+  margin-bottom:10px;letter-spacing:.02em;line-height:1.5;
+}
+.problem p{color:var(--muted);font-size:14px;line-height:1.9}
+.problem-icon{
+  position:absolute;right:24px;top:36px;width:56px;height:56px;
+  color:color-mix(in srgb,var(--red) 20%,transparent);
+}
+
+/* ========= 002 Manifesto / Why us ========= */
+.sec-manifesto{background:var(--ink);color:#f5efe1;padding:140px 0;position:relative;overflow:hidden}
+.sec-manifesto::before{
+  content:"専";position:absolute;right:-80px;bottom:-120px;
+  font-family:var(--f-min);font-size:min(60vw,780px);font-weight:800;
+  color:#1a1612;line-height:1;letter-spacing:-.05em;pointer-events:none;
+}
+.sec-manifesto .wrap{position:relative;z-index:2}
+.manifesto-body{
+  font-family:var(--f-min);font-size:clamp(20px,2.4vw,30px);line-height:2;
+  color:#f5efe1;max-width:28ch;margin:32px 0 72px;letter-spacing:.03em;
+}
+.manifesto-body .em{color:var(--red);font-weight:800}
+.strengths{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border-top:1px solid #2a2520;
+}
+.strength{
+  padding:40px 32px 40px 0;border-bottom:1px solid #2a2520;
+  display:flex;flex-direction:column;gap:16px;
+}
+.strength:not(:last-child){border-right:1px solid #2a2520;padding-right:40px}
+.strength:not(:first-child){padding-left:40px}
+.strength-badge{
+  display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.3em;color:var(--red);font-weight:600;
+}
+.strength-badge .dot{width:6px;height:6px;background:var(--red);border-radius:50%}
+.strength h3{
+  font-family:var(--f-min);font-size:22px;color:#f5efe1;letter-spacing:.04em;line-height:1.5;font-weight:700;
+}
+.strength p{color:#9e988b;font-size:14px;line-height:1.9}
+.strength-num{
+  font-family:var(--f-mono);font-size:52px;font-weight:700;color:#2a2520;line-height:.9;
+  letter-spacing:-.02em;margin-top:auto;padding-top:24px;
+}
+
+/* ========= 003 Before/After ========= */
+.sec-ba{background:var(--ivory-2);color:var(--fg);padding:120px 0}
+.ba-grid{
+  display:grid;grid-template-columns:1.3fr 1fr;gap:0;align-items:stretch;
+  margin-top:64px;
+}
+.ba-card{position:relative;overflow:hidden}
+.ba-art{aspect-ratio:4/3;position:relative;overflow:hidden}
+.ba-art svg{width:100%;height:100%;display:block}
+.ba-tag{
+  position:absolute;top:24px;left:24px;z-index:2;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.3em;font-weight:700;
+  padding:8px 14px;
+}
+.ba-tag.before{background:var(--red);color:#fff8ec}
+.ba-tag.after{background:var(--teal);color:#eaf3f5}
+.ba-caption{
+  background:var(--card);padding:28px 32px;border:1px solid var(--line);border-top:0;
+}
+.ba-caption h3{font-family:var(--f-sans);font-size:16px;font-weight:900;color:var(--ink);margin-bottom:8px;letter-spacing:.02em}
+.ba-caption p{color:var(--muted);font-size:13px;line-height:1.85}
+
+/* ========= 004 Pricing ========= */
+.sec-price{background:var(--ivory);color:var(--fg);padding:120px 0}
+.price-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:0;margin-top:64px}
+.price-card{
+  background:var(--card);padding:48px 40px;position:relative;
+  border:1px solid var(--line);
+  display:flex;flex-direction:column;
+}
+.price-card + .price-card{border-left:0}
+.price-card.featured{
+  background:var(--ink);color:#f5efe1;border-color:var(--ink);
+}
+.price-card.featured h3,.price-card.featured .price-num,.price-card.featured .price-list li{color:#f5efe1}
+.price-card.featured .price-unit,.price-card.featured .price-note{color:#9e988b}
+.price-tag{
+  position:absolute;top:-14px;left:40px;
+  background:var(--red);color:#fff8ec;
+  font-family:var(--f-mono);font-size:11px;font-weight:700;letter-spacing:.3em;
+  padding:8px 16px;
+}
+.price-kind{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.3em;color:var(--muted);
+  margin-bottom:14px;font-weight:600;
+}
+.price-card.featured .price-kind{color:var(--red)}
+.price-card h3{
+  font-family:var(--f-sans);font-size:21px;font-weight:900;color:var(--ink);
+  letter-spacing:.02em;line-height:1.5;margin-bottom:24px;
+}
+.price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.price-num{
+  font-family:var(--f-min);font-weight:800;font-size:72px;color:var(--ink);
+  line-height:.9;letter-spacing:-.01em;
+}
+.price-unit{color:var(--muted);font-size:14px;font-weight:500}
+.price-note{color:var(--muted);font-size:12px;margin-bottom:28px;letter-spacing:.05em}
+.price-list{list-style:none;padding:24px 0 0;margin:0;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);flex:1}
+.price-card.featured .price-list{border-top-color:#2a2520}
+.price-list li{display:flex;gap:12px;font-size:14px;align-items:flex-start;line-height:1.7}
+.price-list li::before{
+  content:"";flex:none;width:14px;height:1px;background:var(--red);margin-top:14px;
+}
+.price-opts{
+  margin-top:28px;padding-top:24px;border-top:1px dashed var(--line);
+  display:grid;grid-template-columns:1fr;gap:10px;
+}
+.price-card.featured .price-opts{border-top-color:#2a2520}
+.price-opts .opt{display:flex;justify-content:space-between;font-size:13px;gap:16px;line-height:1.6}
+.price-opts .v{color:var(--red);font-weight:700;font-family:var(--f-mono);letter-spacing:.03em;white-space:nowrap}
+.price-foot{
+  margin-top:40px;color:var(--muted);text-align:center;font-size:12px;letter-spacing:.08em;
+}
+
+/* ========= 005 Process ========= */
+.sec-process{background:var(--ink);color:#f5efe1;padding:120px 0;overflow:hidden}
+.process-track{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:64px;
+  border-top:1px solid #2a2520;
+}
+.pstep{
+  padding:40px 24px 40px 0;border-bottom:1px solid #2a2520;
+  display:flex;flex-direction:column;gap:16px;position:relative;
+}
+.pstep:not(:last-child){border-right:1px solid #2a2520;padding-right:32px}
+.pstep:not(:first-child){padding-left:32px}
+.pstep-num{
+  font-family:var(--f-mono);font-size:12px;letter-spacing:.3em;color:var(--red);
+  font-weight:600;display:flex;align-items:center;gap:10px;
+}
+.pstep-num .big{
+  font-family:var(--f-min);font-size:40px;font-weight:800;color:#f5efe1;line-height:.9;
+}
+.pstep h3{
+  font-family:var(--f-sans);font-size:16px;font-weight:900;color:#f5efe1;
+  letter-spacing:.04em;line-height:1.5;
+}
+.pstep p{color:#9e988b;font-size:13px;line-height:1.8}
+
+/* ========= 006 Voices ========= */
+.sec-voices{background:var(--ivory);color:var(--fg);padding:120px 0}
+.voices-top{
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:48px;margin-bottom:64px;
+}
+.rating-badge{
+  display:inline-flex;flex-direction:column;align-items:flex-end;gap:4px;
+}
+.rating-badge .stars{color:var(--gold);font-size:22px;letter-spacing:2px}
+.rating-badge .ct{font-family:var(--f-mono);font-size:12px;letter-spacing:.2em;color:var(--muted)}
+.rating-badge .ct b{color:var(--ink);font-weight:700;font-size:14px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.testi{
+  background:var(--card);border:1px solid var(--line);
+  padding:40px 32px;position:relative;display:flex;flex-direction:column;gap:16px;
+}
+.testi .quote-mark{
+  position:absolute;top:16px;right:28px;
+  font-family:var(--f-min);font-size:72px;color:var(--red);line-height:1;opacity:.25;
+}
+.testi .stars{color:var(--gold);font-size:15px;letter-spacing:2px}
+.testi blockquote{margin:0;color:var(--ink);font-size:14px;line-height:1.95;font-family:var(--f-min);letter-spacing:.02em}
+.testi-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:auto;letter-spacing:.04em;font-family:var(--f-sans)}
+.testi-meta strong{color:var(--ink);font-weight:700}
+
+/* ========= 007 FAQ ========= */
+.sec-faq{background:var(--ivory-2);color:var(--fg);padding:120px 0}
+.faq-list{max-width:900px;margin:64px auto 0;border-top:1px solid var(--line)}
+details.faq{
+  padding:0;border-bottom:1px solid var(--line);background:transparent;
+}
+details.faq summary{
+  list-style:none;cursor:pointer;padding:28px 60px 28px 40px;position:relative;
+  font-family:var(--f-sans);font-weight:700;font-size:16px;color:var(--ink);
+  letter-spacing:.03em;
+  display:grid;grid-template-columns:40px 1fr;gap:20px;align-items:center;
+}
+details.faq summary::-webkit-details-marker{display:none}
+.faq-q{
+  font-family:var(--f-min);font-size:24px;font-weight:800;color:var(--red);line-height:1;
+}
+details.faq summary::after{
+  content:"";position:absolute;right:36px;top:50%;width:14px;height:1px;
+  background:var(--ink);
+}
+details.faq summary::before{
+  content:"";position:absolute;right:36px;top:50%;width:1px;height:14px;left:auto;margin-left:6.5px;
+  background:var(--ink);transition:transform .25s;transform:translateY(-50%);
+}
+details.faq[open] summary::before{transform:translateY(-50%) scaleY(0)}
+details.faq .ans{
+  padding:0 60px 28px 100px;color:var(--muted);font-size:14px;line-height:1.95;
+}
+
+/* ========= 008 Area + About ========= */
+.sec-area{background:var(--ink);color:#f5efe1;padding:120px 0;position:relative;overflow:hidden}
+.sec-area::before{
+  content:"札幌";position:absolute;left:-40px;top:-80px;font-family:var(--f-min);
+  font-size:min(28vw,320px);font-weight:800;color:#1a1612;line-height:1;letter-spacing:-.03em;pointer-events:none;
+}
+.sec-area .wrap{position:relative;z-index:2}
+.area-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;margin-top:64px}
+.area-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0;list-style:none;padding:0;margin:0;border-top:1px solid #2a2520}
+.area-list li{
+  display:flex;align-items:center;gap:14px;font-size:14px;padding:16px 0;
+  border-bottom:1px solid #2a2520;color:#c7bfae;letter-spacing:.05em;
+}
+.area-list li:nth-child(odd){padding-right:20px;border-right:1px solid #2a2520}
+.area-list li:nth-child(even){padding-left:20px}
+.area-list li::before{content:"";width:6px;height:6px;background:var(--red);border-radius:50%;flex:none}
+.area-note{color:#9e988b;font-size:13px;margin-top:28px;line-height:1.9}
+.area-map{background:#15110c;border:1px solid #2a2520;padding:28px;aspect-ratio:1/1;position:relative}
+.area-map svg{width:100%;height:100%}
+
+/* ========= 009 About / Company ========= */
+.sec-about{background:var(--ivory);color:var(--fg);padding:120px 0}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;margin-top:64px;align-items:start}
+.rep-card{position:sticky;top:120px;background:var(--card);border:1px solid var(--line);padding:40px}
+.rep-avatar{
+  width:88px;height:88px;background:var(--red);color:#fff8ec;
+  display:grid;place-items:center;font-family:var(--f-min);font-weight:800;font-size:40px;
+  margin-bottom:24px;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.rep-name{font-family:var(--f-min);font-size:20px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.rep-role{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:20px}
+.rep-quote{
+  font-family:var(--f-min);font-size:15px;line-height:2;color:var(--muted);
+  padding-left:14px;border-left:2px solid var(--red);
+}
+.company-table{background:var(--card);border:1px solid var(--line)}
+.company-table dl{margin:0;display:grid;grid-template-columns:180px 1fr}
+.company-table dt,.company-table dd{margin:0;padding:22px 28px;border-bottom:1px solid var(--line);font-size:14px;line-height:1.7}
+.company-table dt{
+  font-family:var(--f-mono);font-weight:600;color:var(--muted);
+  font-size:11px;letter-spacing:.2em;padding-top:26px;
+}
+.company-table dd{color:var(--ink);letter-spacing:.02em}
+.company-table dl>*:nth-last-child(1),.company-table dl>*:nth-last-child(2){border-bottom:0}
+
+/* ========= 010 Contact ========= */
+.sec-contact{background:var(--ink);color:#f5efe1;padding:120px 0;position:relative;overflow:hidden}
+.sec-contact::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--red) 0 20%,transparent 20% 25%,var(--red) 25% 60%,transparent 60% 65%,var(--red) 65%);
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:start;margin-top:64px}
+.contact-aside{display:flex;flex-direction:column;gap:32px}
+.contact-callout{
+  background:var(--red);color:#fff8ec;padding:36px 32px;position:relative;
+}
+.contact-callout .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.3em;color:#f5c9bc;margin-bottom:12px}
+.contact-callout .num{font-family:var(--f-mono);font-size:40px;font-weight:700;line-height:1;letter-spacing:.03em;color:#fff8ec;display:block}
+.contact-callout .hrs{color:#f5c9bc;font-size:13px;margin-top:12px;letter-spacing:.08em}
+.contact-info-list{display:flex;flex-direction:column;gap:20px}
+.cinfo{display:flex;gap:16px;font-size:13px;color:#c7bfae;line-height:1.8}
+.cinfo-ico{
+  width:36px;height:36px;flex:none;border:1px solid #2a2520;
+  display:grid;place-items:center;color:var(--red);
+}
+.cinfo-ico svg{width:16px;height:16px}
+.cinfo b{color:#f5efe1;font-weight:700;display:block;font-family:var(--f-sans);font-size:13px;letter-spacing:.08em;margin-bottom:3px}
+
+form.contact{background:#15110c;border:1px solid #2a2520;padding:40px;display:flex;flex-direction:column;gap:20px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{
+  font-family:var(--f-mono);font-size:11px;font-weight:600;letter-spacing:.2em;
+  color:#c7bfae;
+}
+.field label .req{color:var(--red);margin-left:6px;font-family:var(--f-sans);font-size:10px}
+.field input,.field select,.field textarea{
+  width:100%;padding:14px 16px;background:var(--ink);color:#f5efe1;
+  border:1px solid #2a2520;font-size:14px;transition:border-color .15s;font-family:var(--f-sans);
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);outline:none}
+.field textarea{min-height:120px;resize:vertical;font-family:var(--f-sans)}
+.field select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23c7bfae' stroke-width='1.5'><polyline points='5 8 10 13 15 8'/></svg>");background-repeat:no-repeat;background-position:right 14px center;background-size:14px;padding-right:36px}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.checks{display:flex;flex-wrap:wrap;gap:14px}
+.checks label{display:flex;align-items:center;gap:8px;font-family:var(--f-sans);font-size:13px;letter-spacing:.02em;cursor:pointer;color:#f5efe1;text-transform:none}
+.checks input{width:16px;height:16px;accent-color:var(--red)}
+form.contact .btn-submit{
+  background:var(--red);color:#fff8ec;padding:18px;font-weight:700;font-size:13px;
+  letter-spacing:.2em;margin-top:8px;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+}
+form.contact .btn-submit:hover{background:var(--red-dark)}
+.form-ok{
+  background:transparent;border:1px solid var(--red);color:#f5efe1;
+  padding:16px 20px;font-size:13px;text-align:center;letter-spacing:.05em;line-height:1.8;
+}
+
+/* ========= Footer ========= */
+footer{background:#05040a;color:#9e988b;padding:72px 0 28px;position:relative}
+footer::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,#2a241d,transparent);
+}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;max-width:1280px;margin-inline:auto;padding:0 32px}
+.foot-brand{display:flex;flex-direction:column;gap:16px}
+.foot-brand .emblem{
+  width:48px;height:48px;background:var(--red);color:#fff8ec;
+  display:grid;place-items:center;font-family:var(--f-min);font-weight:800;font-size:22px;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.foot-brand .nm{font-family:var(--f-min);font-weight:800;font-size:20px;color:#f5efe1;letter-spacing:.08em}
+.foot-brand .sub{font-family:var(--f-mono);font-size:11px;letter-spacing:.3em;color:#5c564d}
+.foot-tagline{color:#776f63;font-size:13px;max-width:40ch;line-height:1.9;margin-top:12px}
+.foot-col h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.3em;color:#f5efe1;font-weight:600;margin-bottom:20px}
+.foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13px;color:#9e988b;letter-spacing:.02em}
+.foot-col a:hover{color:#f5efe1}
+.foot-bar{
+  margin-top:56px;padding-top:24px;border-top:1px solid #1a1612;
+  max-width:1280px;margin-inline:auto;padding-inline:32px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-family:var(--f-mono);font-size:11px;color:#5c564d;letter-spacing:.2em;
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 980px){
+  .hero{padding-top:48px}
+  .hero-grid{grid-template-columns:1fr;align-items:start;padding:0 24px}
+  .hero-phone{text-align:left}
+  .vkana{display:none}
+  .sec-problems .top,.voices-top{grid-template-columns:1fr;gap:32px}
+  .problem-list{grid-template-columns:1fr}
+  .problem,.problem:nth-child(odd),.problem:nth-child(even){border-right:0;padding:28px 0}
+  .strengths{grid-template-columns:1fr}
+  .strength,.strength:not(:last-child),.strength:not(:first-child){border-right:0;padding:32px 0}
+  .ba-grid{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:1fr}
+  .price-card+.price-card{border-left:1px solid var(--line);border-top:0}
+  .price-card.featured+.price-card,.price-card+.price-card.featured{border-left-color:var(--ink)}
+  .process-track{grid-template-columns:repeat(2,1fr)}
+  .pstep,.pstep:not(:last-child),.pstep:not(:first-child){padding:28px 20px}
+  .pstep:nth-child(odd){border-right:1px solid #2a2520}
+  .pstep:nth-child(even){border-right:0}
+  .testi-grid{grid-template-columns:1fr}
+  .area-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .rep-card{position:static}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .company-table dl{grid-template-columns:140px 1fr}
+  section:not(.hero){padding:72px 0}
+  .sec-manifesto::before{font-size:60vw;right:-40px;bottom:-60px}
+}
+@media (max-width: 540px){
+  .topbar-inner{padding:10px 16px}
+  .brand-txt{display:none}
+  .wrap{padding:0 20px}
+  .hero-grid{padding:0 20px}
+  .hero h1{font-size:40px}
+  .process-track{grid-template-columns:1fr}
+  .pstep:nth-child(odd){border-right:0}
+  .area-list{grid-template-columns:1fr}
+  .area-list li:nth-child(odd){border-right:0;padding-right:0}
+  .area-list li:nth-child(even){padding-left:0}
+  .row-2{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .company-table dl{grid-template-columns:1fr}
+  .company-table dt{border-bottom:0;padding-bottom:4px;padding-top:20px}
+  .company-table dd{padding-top:4px}
+  details.faq summary{padding:22px 48px 22px 24px;grid-template-columns:28px 1fr;gap:14px}
+  details.faq .ans{padding:0 48px 22px 66px}
+  .price-card{padding:36px 28px}
+  .price-num{font-size:56px}
+  form.contact{padding:28px 24px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+
+<!-- ========== Top bar ========== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-emblem" aria-hidden="true">救</div>
+      <div class="brand-txt">
+        <span class="brand-ja">エアコン清掃救急隊</span>
+        <span class="brand-en">AIRCLE / SAPPORO</span>
+      </div>
+    </div>
+    <a href="tel:011-600-0375" class="topcall">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+      011-600-0375
+    </a>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="vkana" aria-hidden="true">エアコンセイソウキュウキュウタイ</div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-chapter">CH. 000　INTRO</div>
+      <h1>
+        <span class="block">天井の中、</span>
+        <span class="block">見えない<span class="em">黒</span>を、</span>
+        <span class="block">分解して、</span>
+        <span class="block"><span class="accent">救出する。</span></span>
+      </h1>
+      <p class="hero-sub">
+        札幌・業務用天井カセットエアコンの分解洗浄 救急隊。<br>
+        飲食店／美容室／クリニック／オフィス──<br>
+        営業への影響を最小化しながら、カビとホコリを根こそぎ除去します。
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">無料見積りを依頼する <span class="btn-arrow"></span></a>
+        <a href="#price" class="btn btn-ghost">料金プランを見る</a>
+      </div>
+    </div>
+    <div class="hero-phone">
+      <div class="lbl">EMERGENCY LINE</div>
+      <a class="num" href="tel:011-600-0375">011-600-0375</a>
+      <div class="hrs">受付 8:00 – 20:00 / 早朝・深夜 応相談</div>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>天カセ専門</span><span>損害保険加入済</span><span>ミツモア ★5.0 × 83件</span><span>早朝深夜対応</span><span>インボイス対応</span><span>法人・店舗歓迎</span>
+      <span>天カセ専門</span><span>損害保険加入済</span><span>ミツモア ★5.0 × 83件</span><span>早朝深夜対応</span><span>インボイス対応</span><span>法人・店舗歓迎</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 001 Problems ========== -->
+<section class="sec-problems">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <div class="chapter"><span class="num">001</span> SYMPTOMS <span class="sep"></span></div>
+        <h2 class="sec-title">そのサイン、エアコン内部からの<br>SOS かもしれません。</h2>
+      </div>
+      <p class="sec-lede">天井カセット特有のトラブルは、見えないところで静かに進行します。放置するほど修理費が膨らみ、営業にも影響します。早期の分解洗浄が最も経済的な対処です。</p>
+    </div>
+    <div class="problem-list">
+      <div class="problem">
+        <div class="problem-num">01</div>
+        <div>
+          <h3>吹き出し口から水が垂れる</h3>
+          <p>ドレンパンの詰まりや汚れが原因。放置すると天井のシミ・漏電の原因になります。</p>
+        </div>
+        <svg class="problem-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 12h40v10a4 4 0 01-4 4H12a4 4 0 01-4-4V12z"/><path d="M20 32v8M28 32v12M36 32v8"/><circle cx="20" cy="46" r="2" fill="currentColor"/><circle cx="28" cy="50" r="2" fill="currentColor"/><circle cx="36" cy="46" r="2" fill="currentColor"/></svg>
+      </div>
+      <div class="problem">
+        <div class="problem-num">02</div>
+        <div>
+          <h3>酸っぱい、カビ臭いニオイ</h3>
+          <p>ファン内部のカビ・雑菌が原因。飲食店ではクレームにつながります。</p>
+        </div>
+        <svg class="problem-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 32c3-6 25-6 28 0"/><path d="M18 38c3-4 17-4 20 0"/><path d="M22 44c2-3 10-3 12 0"/><circle cx="28" cy="18" r="4"/><path d="M28 22v4"/></svg>
+      </div>
+      <div class="problem">
+        <div class="problem-num">03</div>
+        <div>
+          <h3>冷えが悪い、電気代が高い</h3>
+          <p>熱交換器の目詰まりで効率が低下。清掃だけで省エネ効果が期待できます。</p>
+        </div>
+        <svg class="problem-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="28" cy="28" r="8"/><path d="M28 10v6M28 40v6M10 28h6M40 28h6M15 15l4 4M37 37l4 4M15 41l4-4M37 19l4-4"/></svg>
+      </div>
+      <div class="problem">
+        <div class="problem-num">04</div>
+        <div>
+          <h3>何年も分解清掃していない</h3>
+          <p>2〜3年に1度の分解洗浄が目安。寿命を延ばし、故障リスクを下げます。</p>
+        </div>
+        <svg class="problem-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="8" y="12" width="40" height="26" rx="2"/><path d="M20 46h16M28 38v8"/><path d="M16 20h24M16 26h24"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 002 Manifesto + Strengths ========== -->
+<section class="sec-manifesto">
+  <div class="wrap">
+    <div class="chapter chapter-dark"><span class="num">002</span> PROMISE <span class="sep"></span></div>
+    <h2 class="sec-title light">「天カセ専門」だから、<br>できること。</h2>
+    <p class="manifesto-body">
+      エアコンは、どこでも同じではありません。<br>
+      業務用天井カセットは、分解の順序も、洗い方も、<br>
+      組み上げの精度も <span class="em">まったくの別物</span>。<br>
+      私たちは一台一台と、専門家として向き合います。
+    </p>
+
+    <div class="strengths">
+      <div class="strength">
+        <div class="strength-badge"><span class="dot"></span>SPECIALIST</div>
+        <h3>天井カセット一本に<br>絞ったプロ集団</h3>
+        <p>一般ハウスクリーニング業者が苦手とする業務用天カセ。パネル・ファン・ドレンパン・フィルターを一つひとつ取り外す「完全分解洗浄」を標準にしています。</p>
+        <div class="strength-num">01</div>
+      </div>
+      <div class="strength">
+        <div class="strength-badge"><span class="dot"></span>SAFETY</div>
+        <h3>損害保険加入<br>法人取引に対応</h3>
+        <p>万一の設備・内装トラブルに備え、業者賠償責任保険に加入済。請求書払い、適格請求書（インボイス）発行にも対応しています。</p>
+        <div class="strength-num">02</div>
+      </div>
+      <div class="strength">
+        <div class="strength-badge"><span class="dot"></span>SPEED</div>
+        <h3>早朝・深夜<br>水漏れ即日</h3>
+        <p>営業終了後の夜間作業、開店前の早朝作業で店舗への影響を最小化。突然の水漏れ・運転停止には、札幌市内を中心に即日お伺いします。</p>
+        <div class="strength-num">03</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 003 Before/After ========== -->
+<section class="sec-ba">
+  <div class="wrap">
+    <div class="chapter"><span class="num">003</span> WORK <span class="sep"></span></div>
+    <h2 class="sec-title">目に見えない汚れを、<br>根こそぎ。</h2>
+    <p class="sec-lede">天井カセット内部は、2〜3年でこれだけ変わります。ファン・ドレンパンを分解すると、驚くほどの黒い汚れが出てきます。</p>
+    <div class="ba-grid">
+      <div class="ba-card">
+        <div class="ba-art">
+          <span class="ba-tag before">BEFORE</span>
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="dirt" cx="50%" cy="50%" r="60%">
+                <stop offset="0" stop-color="#2a2017"/>
+                <stop offset="1" stop-color="#0a0603"/>
+              </radialGradient>
+              <pattern id="moldp" width="16" height="16" patternUnits="userSpaceOnUse">
+                <circle cx="4" cy="4" r="1.8" fill="#3a2a18" opacity=".85"/>
+                <circle cx="12" cy="11" r="1.4" fill="#1a1208" opacity=".9"/>
+                <circle cx="7" cy="13" r="1" fill="#2a1e10" opacity=".7"/>
+              </pattern>
+            </defs>
+            <rect width="400" height="300" fill="url(#dirt)"/>
+            <rect x="40" y="40" width="320" height="220" fill="#1a140d" stroke="#3a2d1a" stroke-width="2"/>
+            <rect x="60" y="60" width="280" height="180" fill="url(#moldp)"/>
+            <g stroke="#4a3620" stroke-width="2" opacity=".9">
+              <line x1="80" y1="90" x2="320" y2="90"/><line x1="80" y1="110" x2="320" y2="110"/>
+              <line x1="80" y1="130" x2="320" y2="130"/><line x1="80" y1="150" x2="320" y2="150"/>
+              <line x1="80" y1="170" x2="320" y2="170"/><line x1="80" y1="190" x2="320" y2="190"/>
+              <line x1="80" y1="210" x2="320" y2="210"/>
+            </g>
+            <circle cx="130" cy="120" r="20" fill="#0a0603" opacity=".9"/>
+            <circle cx="260" cy="170" r="24" fill="#0a0603" opacity=".85"/>
+            <circle cx="200" cy="140" r="12" fill="#1a1208" opacity=".95"/>
+            <circle cx="310" cy="95" r="9" fill="#0a0603" opacity=".9"/>
+            <circle cx="100" cy="195" r="14" fill="#0a0603" opacity=".85"/>
+          </svg>
+        </div>
+        <div class="ba-caption">
+          <h3>施工前｜カビ・油煙・ホコリがびっしり</h3>
+          <p>飲食店の天カセ。油を含んだホコリとカビで熱交換器がほぼ目詰まり状態。嫌なニオイと冷えの悪さの直接原因です。</p>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-art" style="background:linear-gradient(180deg,#f6fafb,#dde9ec)">
+          <span class="ba-tag after">AFTER</span>
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="300" fill="none"/>
+            <rect x="40" y="40" width="320" height="220" fill="#ffffff" stroke="#9eb9c1" stroke-width="2"/>
+            <rect x="60" y="60" width="280" height="180" fill="#f6fafb"/>
+            <g stroke="#b9d1d8" stroke-width="2">
+              <line x1="80" y1="90" x2="320" y2="90"/><line x1="80" y1="110" x2="320" y2="110"/>
+              <line x1="80" y1="130" x2="320" y2="130"/><line x1="80" y1="150" x2="320" y2="150"/>
+              <line x1="80" y1="170" x2="320" y2="170"/><line x1="80" y1="190" x2="320" y2="190"/>
+              <line x1="80" y1="210" x2="320" y2="210"/>
+            </g>
+            <g fill="#143f49">
+              <text x="140" y="135" font-size="26" text-anchor="middle">✦</text>
+              <text x="260" y="180" font-size="20" text-anchor="middle">✦</text>
+              <text x="200" y="105" font-size="14" text-anchor="middle">✦</text>
+              <text x="310" y="160" font-size="12" text-anchor="middle">✦</text>
+            </g>
+          </svg>
+        </div>
+        <div class="ba-caption">
+          <h3>施工後｜純白に蘇り、風量も改善</h3>
+          <p>専用洗剤で高圧洗浄、組み上げて動作確認。防カビ仕上げで次回まで長持ちさせます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 004 Pricing ========== -->
+<section class="sec-price" id="price">
+  <div class="wrap">
+    <div class="chapter"><span class="num">004</span> PRICING <span class="sep"></span></div>
+    <h2 class="sec-title">見積り無料・明朗会計。<br>追加料金はありません。</h2>
+    <p class="sec-lede">作業内容と料金は事前にお伝えし、ご納得いただいてから着手します。現地状況により金額が変わる場合は、必ず事前にご説明します。</p>
+
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-kind">PLAN A ─ HOME</div>
+        <h3>家庭用 壁掛けエアコン<br>クリーニング</h3>
+        <div class="price-row">
+          <span class="price-num">12,000</span>
+          <span class="price-unit">円 / 1台（税込）</span>
+        </div>
+        <div class="price-note">作業時間：約1時間〜（基本分解洗浄）</div>
+        <ul class="price-list">
+          <li>フィルター・カバー・ファン・熱交換器の分解洗浄</li>
+          <li>専用洗剤による高圧洗浄＋動作確認</li>
+          <li>養生から使用後の清掃まで一貫対応</li>
+          <li>水漏れ・冷えの悪さのご相談も無料</li>
+        </ul>
+        <div class="price-opts">
+          <div class="opt"><span>お掃除ロボ機能付き追加</span><span class="v">＋7,000円</span></div>
+          <div class="opt"><span>防カビ仕上げ</span><span class="v">＋3,000円</span></div>
+          <div class="opt"><span>室外機洗浄（省エネ）</span><span class="v">＋5,000円</span></div>
+          <div class="opt"><span>複数台割引</span><span class="v">1台 −1,000円</span></div>
+        </div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tag">当店の専門分野</div>
+        <div class="price-kind">PLAN B ─ COMMERCIAL</div>
+        <h3>業務用 天井カセット・天吊り<br>エアコン クリーニング</h3>
+        <div class="price-row">
+          <span class="price-num">28,000</span>
+          <span class="price-unit">円 / 1台（税込）</span>
+        </div>
+        <div class="price-note">作業時間：約3時間（基本分解清掃）</div>
+        <ul class="price-list">
+          <li>パネル・ファン・ドレンパン・フィルターの完全分解</li>
+          <li>熱交換器の高圧洗浄＋ドレン詰まり除去</li>
+          <li>店舗・事務所の養生、営業への影響を最小化</li>
+          <li>水漏れ・運転停止トラブルの原因切り分けも対応</li>
+        </ul>
+        <div class="price-opts">
+          <div class="opt"><span>防カビ仕上げ</span><span class="v">＋5,000円</span></div>
+          <div class="opt"><span>室外機洗浄（省エネ）</span><span class="v">＋8,000円</span></div>
+          <div class="opt"><span>複数台割引</span><span class="v">1台 −2,000円</span></div>
+          <div class="opt"><span>厨房・ひどい汚れ</span><span class="v">別途お見積り</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="price-foot">※ すべて税込価格　/　早朝・深夜対応可　/　請求書払い・適格請求書（インボイス）発行に対応</p>
+  </div>
+</section>
+
+<!-- ========== 005 Process ========== -->
+<section class="sec-process">
+  <div class="wrap">
+    <div class="chapter chapter-dark"><span class="num">005</span> PROCESS <span class="sep"></span></div>
+    <h2 class="sec-title light">ご依頼から完了まで、<br>5ステップ。</h2>
+    <p class="sec-lede light">最短で当日中にお伺いします。見積り後のキャンセル料は一切いただきません。</p>
+    <div class="process-track">
+      <div class="pstep">
+        <div class="pstep-num"><span class="big">01</span> / 05</div>
+        <h3>お問い合わせ</h3>
+        <p>電話またはフォームから、台数・設置状況・ご希望日時をお知らせください。</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num"><span class="big">02</span> / 05</div>
+        <h3>無料お見積り</h3>
+        <p>必要に応じて現地確認。追加料金なしの金額を事前にお伝えします。</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num"><span class="big">03</span> / 05</div>
+        <h3>日程調整・訪問</h3>
+        <p>営業時間や休日に合わせて柔軟に調整。早朝・深夜も対応可能です。</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num"><span class="big">04</span> / 05</div>
+        <h3>養生・分解洗浄</h3>
+        <p>床・什器を丁寧に養生し、分解・高圧洗浄・組み上げ・動作確認までを一貫で。</p>
+      </div>
+      <div class="pstep">
+        <div class="pstep-num"><span class="big">05</span> / 05</div>
+        <h3>仕上がり確認・お支払い</h3>
+        <p>一緒に仕上がりを確認。現金・振込・請求書払いに対応しています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 006 Voices ========== -->
+<section class="sec-voices">
+  <div class="wrap">
+    <div class="voices-top">
+      <div>
+        <div class="chapter"><span class="num">006</span> VOICES <span class="sep"></span></div>
+        <h2 class="sec-title">お客様の声。</h2>
+        <p class="sec-lede">マッチングサービス「ミツモア」での実際の口コミ。評価5件すべてで満点をいただいています。</p>
+      </div>
+      <div class="rating-badge">
+        <div class="stars" aria-label="5 of 5 stars">★★★★★</div>
+        <div class="ct"><b>5.0</b> / 口コミ <b>83</b>件</div>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="quote-mark" aria-hidden="true">「</div>
+        <div class="stars">★★★★★</div>
+        <blockquote>エアコンの匂いがひどく、カビ、湿ったホコリのゴミも大量に見えたため、清掃を依頼しました。綺麗に分解洗浄していただき、匂いもなくなりとても満足です。作業状況の説明や対応も丁寧で、また次の清掃の機会があったら再度依頼したいと思える業者さんでした。</blockquote>
+        <div class="testi-meta"><strong>北山 様（50代 男性）</strong><span>壁掛けエアコン</span></div>
+      </div>
+      <div class="testi">
+        <div class="quote-mark" aria-hidden="true">「</div>
+        <div class="stars">★★★★★</div>
+        <blockquote>転居先のエアコン清掃をお願いしました。カビや埃でかなり汚れていたのを見て、改めてお願いして本当に良かったと思いました。これで気持ちよく使用することができます。この度はとても丁寧に作業していただき、綺麗にしていただきありがとうございました。また利用させていただきます。</blockquote>
+        <div class="testi-meta"><strong>伊藤 様（40代 女性）</strong><span>お掃除機能付き</span></div>
+      </div>
+      <div class="testi">
+        <div class="quote-mark" aria-hidden="true">「</div>
+        <div class="stars">★★★★★</div>
+        <blockquote>エアコンとレンジフードをお願いしました。丁寧な作業と説明をしてくださり、とても綺麗になって満足です。料金も安くて良かったです。ありがとうございました。</blockquote>
+        <div class="testi-meta"><strong>松浦 様（50代）</strong><span>複数台清掃</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 007 FAQ ========== -->
+<section class="sec-faq">
+  <div class="wrap">
+    <div class="chapter"><span class="num">007</span> FAQ <span class="sep"></span></div>
+    <h2 class="sec-title">よくあるご質問。</h2>
+    <div class="faq-list">
+      <details class="faq" open>
+        <summary><span class="faq-q">Q</span><span>作業中、営業は続けられますか？</span></summary>
+        <div class="ans">天井カセット1台あたり約3時間の作業です。1〜2台であれば営業時間外（開店前の早朝、閉店後の深夜）に完了させることが可能です。店舗の営業時間に合わせてスケジュール調整いたしますので、ご希望をお知らせください。</div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-q">Q</span><span>見積り後にキャンセルしても大丈夫ですか？</span></summary>
+        <div class="ans">はい、お見積り後のキャンセル料はいただきません。他社と比較いただいてからのご判断で問題ありません。</div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-q">Q</span><span>水漏れしているのですが、すぐ来てもらえますか？</span></summary>
+        <div class="ans">札幌市内であれば、空き状況により当日中にお伺いします。応急処置→原因切り分け→本格洗浄まで、ワンストップで対応します。</div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-q">Q</span><span>法人向けの請求書払い・インボイスは対応していますか？</span></summary>
+        <div class="ans">対応しております。請求書払い（月末締め翌月末払いなど）、適格請求書発行事業者としてインボイス番号付きの請求書を発行いたします。</div>
+      </details>
+      <details class="faq">
+        <summary><span class="faq-q">Q</span><span>清掃の頻度の目安は？</span></summary>
+        <div class="ans">飲食店の天井カセットは年1回、オフィス・美容室・クリニックは2〜3年に1回が目安です。使用頻度や油煙の量により変わりますので、現地でご提案します。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 008 Area ========== -->
+<section class="sec-area">
+  <div class="wrap">
+    <div class="chapter chapter-dark"><span class="num">008</span> AREA <span class="sep"></span></div>
+    <h2 class="sec-title light">札幌市内全域＋近郊、<br>対応いたします。</h2>
+    <div class="area-grid">
+      <div>
+        <ul class="area-list">
+          <li>中央区</li><li>北区</li>
+          <li>東区</li><li>白石区</li>
+          <li>豊平区</li><li>南区</li>
+          <li>西区</li><li>厚別区</li>
+          <li>手稲区</li><li>清田区</li>
+          <li>江別市</li><li>北広島市</li>
+          <li>石狩市</li><li>小樽市 近郊</li>
+        </ul>
+        <p class="area-note">※ 上記以外の地域もお気軽にご相談ください。出張費は事前にお見積りに含めてご案内いたします。</p>
+      </div>
+      <div class="area-map" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="zone" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2a2520"/>
+              <stop offset="1" stop-color="#1a1612"/>
+            </linearGradient>
+          </defs>
+          <g fill="url(#zone)" stroke="#4a443b" stroke-width="1.2">
+            <polygon points="150,110 220,100 240,150 180,170 140,150"/>
+            <polygon points="140,150 180,170 170,210 110,200 100,170"/>
+            <polygon points="220,100 290,110 300,160 240,150"/>
+            <polygon points="180,170 240,150 260,210 200,230 170,210"/>
+            <polygon points="260,210 320,190 330,240 280,260 240,240"/>
+            <polygon points="100,170 170,210 200,230 150,270 90,230"/>
+            <polygon points="200,230 260,210 240,240 190,280 150,270"/>
+          </g>
+          <g fill="#9e988b" font-family="Noto Sans JP, sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+            <text x="195" y="140">中央区</text>
+            <text x="145" y="180">西区</text>
+            <text x="265" y="130">東区</text>
+            <text x="215" y="205">豊平区</text>
+            <text x="295" y="230">白石区</text>
+            <text x="140" y="245">南区</text>
+            <text x="200" y="260">清田区</text>
+          </g>
+          <!-- HQ marker at 白石区 -->
+          <g>
+            <circle cx="295" cy="235" r="18" fill="none" stroke="#c7442a" stroke-width="1.5" opacity=".4"/>
+            <circle cx="295" cy="235" r="7" fill="#c7442a"/>
+            <text x="295" y="220" fill="#c7442a" font-family="Oswald, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="2">HQ</text>
+          </g>
+          <text x="200" y="380" fill="#4a443b" font-family="Oswald, sans-serif" font-size="10" letter-spacing="4" text-anchor="middle">SAPPORO, HOKKAIDO</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 009 About / Company ========== -->
+<section class="sec-about">
+  <div class="wrap">
+    <div class="chapter"><span class="num">009</span> ABOUT <span class="sep"></span></div>
+    <h2 class="sec-title">会社概要と、<br>代表のご挨拶。</h2>
+
+    <div class="about-grid">
+      <div class="rep-card">
+        <div class="rep-avatar" aria-hidden="true">和</div>
+        <div class="rep-name">和田 七星</div>
+        <div class="rep-role">REPRESENTATIVE</div>
+        <p class="rep-quote">
+          東京のハウスクリーニング会社で5年間、エアコンクリーニングのチームリーダーを務めてまいりました。札幌で開業して以来、地域密着で一件一件丁寧な作業を心がけ、店舗・事務所・クリニックのお客様から継続してご依頼をいただいております。急な水漏れ・運転停止のご相談もお気軽にお問い合わせください。
+        </p>
+      </div>
+      <div class="company-table">
+        <dl>
+          <dt>商号</dt><dd>株式会社アロー（屋号：エアコン清掃救急隊）</dd>
+          <dt>代表者</dt><dd>和田 七星</dd>
+          <dt>所在地</dt><dd>北海道札幌市白石区北郷8条7丁目3-17</dd>
+          <dt>電話番号</dt><dd>011-600-0375（受付 8:00–20:00／早朝・深夜対応可）</dd>
+          <dt>メール</dt><dd>aircle@arrow-life.net</dd>
+          <dt>Web サイト</dt><dd>arrow-life.net</dd>
+          <dt>事業内容</dt><dd>業務用天井カセットエアコン分解洗浄／家庭用エアコンクリーニング／水漏れ・ドレン詰まり修理／定期メンテナンス</dd>
+          <dt>対応エリア</dt><dd>札幌市内全域＋近郊（江別・北広島・石狩・小樽ほか）</dd>
+          <dt>加入保険</dt><dd>業者賠償責任保険 加入済</dd>
+          <dt>支払方法</dt><dd>現金／銀行振込／請求書払い（法人様）／適格請求書発行対応</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 010 Contact ========== -->
+<section class="sec-contact" id="contact">
+  <div class="wrap">
+    <div class="chapter chapter-dark"><span class="num">010</span> CONTACT <span class="sep"></span></div>
+    <h2 class="sec-title light">お見積り・ご相談は、<br>無料です。</h2>
+    <p class="sec-lede light">お電話またはフォームからお気軽にご連絡ください。札幌市内であれば、空き状況により当日中にお伺いします。</p>
+
+    <div class="contact-grid">
+      <div class="contact-aside">
+        <div class="contact-callout">
+          <div class="lbl">EMERGENCY LINE</div>
+          <a class="num" href="tel:011-600-0375">011-600-0375</a>
+          <div class="hrs">受付 8:00 – 20:00 / 早朝・深夜 応相談</div>
+        </div>
+        <div class="contact-info-list">
+          <div class="cinfo">
+            <div class="cinfo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><b>所在地</b>北海道札幌市白石区北郷8条7丁目3-17</div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><b>メール</b>aircle@arrow-life.net</div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
+            <div><b>Instagram</b>@arrowkife7（施工事例を公開中）</div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div><b>営業時間</b>8:00–20:00（定休日なし）</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact" id="inqForm" novalidate>
+        <div class="field">
+          <label for="f-name">お名前（会社名）<span class="req">必須</span></label>
+          <input id="f-name" name="name" type="text" required placeholder="例：株式会社サンプル／山田 太郎">
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="f-mail">メールアドレス<span class="req">必須</span></label>
+            <input id="f-mail" name="email" type="email" required placeholder="example@your-company.co.jp">
+          </div>
+          <div class="field">
+            <label for="f-tel">電話番号</label>
+            <input id="f-tel" name="tel" type="tel" placeholder="011-000-0000">
+          </div>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="f-type">エアコンの種類<span class="req">必須</span></label>
+            <select id="f-type" name="type" required>
+              <option value="">選択してください</option>
+              <option>業務用 天井カセット</option>
+              <option>業務用 天吊り</option>
+              <option>家庭用 壁掛け</option>
+              <option>家庭用 お掃除機能付き</option>
+              <option>わからない／複数台</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-count">台数</label>
+            <select id="f-count" name="count">
+              <option value="">選択してください</option>
+              <option>1台</option><option>2台</option><option>3台</option>
+              <option>4〜5台</option><option>6台以上</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-place">設置場所の業種</label>
+          <select id="f-place" name="place">
+            <option value="">選択してください</option>
+            <option>飲食店</option><option>美容室・サロン</option>
+            <option>オフィス・事務所</option><option>クリニック・歯科</option>
+            <option>店舗（物販）</option><option>住宅</option><option>その他</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>ご希望の作業内容</label>
+          <div class="checks">
+            <label><input type="checkbox" name="svc" value="分解洗浄"> 分解洗浄</label>
+            <label><input type="checkbox" name="svc" value="水漏れ修理"> 水漏れ修理</label>
+            <label><input type="checkbox" name="svc" value="防カビ仕上げ"> 防カビ仕上げ</label>
+            <label><input type="checkbox" name="svc" value="室外機洗浄"> 室外機洗浄</label>
+            <label><input type="checkbox" name="svc" value="定期メンテ"> 定期メンテ</label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-msg">ご希望日時・ご相談内容</label>
+          <textarea id="f-msg" name="message" placeholder="例：9月の第2週、開店前の8:00〜10:00でお願いしたい。水漏れが発生している。"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          無料見積りを依頼する
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+        <div id="formOk" class="form-ok" hidden>
+          お問い合わせありがとうございます。内容を受け付けました。1営業日以内にご連絡いたします。<br>お急ぎの場合はお電話（011-600-0375）までお願いいたします。
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Footer ========== -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="emblem" aria-hidden="true">救</div>
+      <div>
+        <div class="nm">エアコン清掃救急隊</div>
+        <div class="sub">AIRCLE / 株式会社アロー</div>
+      </div>
+      <p class="foot-tagline">札幌の業務用天井カセットエアコン分解洗浄に特化した、プロの清掃チーム。カビ臭・水漏れ・冷えの悪さを即日解決します。</p>
+    </div>
+    <div class="foot-col">
+      <h4>SERVICES</h4>
+      <ul>
+        <li>業務用 天カセ分解洗浄</li>
+        <li>家庭用エアコンクリーニング</li>
+        <li>水漏れ・ドレン詰まり修理</li>
+        <li>防カビ仕上げ／室外機洗浄</li>
+        <li>定期メンテナンス契約</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>CONTACT</h4>
+      <ul>
+        <li>電話：011-600-0375</li>
+        <li>受付：8:00–20:00</li>
+        <li>所在地：札幌市白石区北郷</li>
+        <li>メール：aircle@arrow-life.net</li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>LINKS</h4>
+      <ul>
+        <li><a href="#price">料金プラン</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+        <li>Instagram：@arrowkife7</li>
+        <li>Web：arrow-life.net</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <div>© 2026 株式会社アロー｜エアコン清掃救急隊</div>
+    <div>SAPPORO ◆ HOKKAIDO ◆ JAPAN</div>
+  </div>
+</footer>
+
+<script>
+  // Form handling (no backend; this page is static). Shows a confirmation and
+  // asks the viewer to call for urgent cases.
+  (function(){
+    var form = document.getElementById('inqForm');
+    var ok = document.getElementById('formOk');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var name = form.name.value.trim();
+      var mail = form.email.value.trim();
+      var type = form.type.value;
+      if (!name || !mail || !type) {
+        alert('お名前・メール・エアコンの種類は必須です。');
+        return;
+      }
+      ok.hidden = false;
+      ok.scrollIntoView({behavior:'smooth', block:'center'});
+      form.reset();
+    });
+
+    // Smooth scroll for in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href').slice(1);
+        var el = id && document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  })();
+</script>
